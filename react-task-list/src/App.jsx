@@ -23,7 +23,7 @@ function App() {
                 <p>Est. time {task.estimatedTime}</p>
               </div>
               <div className="task-state">
-                <h3 className="label">{task.state}</h3>
+                <h3 className={`label ${task.state === "backlog" ? "orange" : "blue"}`}>{task.state}</h3>
               </div>
             </li>
           ))}
@@ -41,7 +41,7 @@ function App() {
                 <p>Est. time {task.estimatedTime}</p>
               </div>
               <div className="task-state">
-                <h3 className="label">{task.state}</h3>
+                <h3 className="label green">{task.state}</h3>
               </div>
             </li>
           ))}
