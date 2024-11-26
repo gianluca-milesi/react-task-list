@@ -1,33 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import tasks from "../data/tasks.js"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const currentTasks = tasks.filter(task => task.state === "backlog" || task.state === "in_progress");
+  const completedTasks = tasks.filter(task => task.state === "completed");
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <h1>Task Manager</h1>
+      </header>
+
+      <main>
+        <h2>Current Tasks ({currentTasks.length})</h2>
+        <ul>
+          {currentTasks.map(task => (
+            <li key={task.id}>
+              <div className="list-items">
+                <h3>{task.title}</h3>
+                <p>Priority: {task.priority}</p>
+                <p>Est. time {task.estimatedTime}</p>
+              </div>
+              <div className="task-state">
+                <h3 className="label">{task.state}</h3>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <hr />
+
+        <h2>Completed Tasks ({completedTasks.length})</h2>
+        <ul>
+          {completedTasks.map(task => (
+            <li key={task.id}>
+              <div className="list-items">
+                <h3>{task.title}</h3>
+                <p>Priority: {task.priority}</p>
+                <p>Est. time {task.estimatedTime}</p>
+              </div>
+              <div className="task-state">
+                <h3 className="label">{task.state}</h3>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </main>
     </>
   )
 }
